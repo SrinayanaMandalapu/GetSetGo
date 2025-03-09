@@ -1,12 +1,12 @@
-import { useDroppable } from "@dnd-kit/core";
+import React from "react";
 
-export default function ItineraryDay({ id, title, children }) {
-  const { setNodeRef } = useDroppable({ id });
-
+const ItineraryDay = ({ id, title, children }) => {
   return (
-    <div ref={setNodeRef} className="p-4 mb-4 bg-white border rounded shadow">
-      <h4 className="font-bold">{title}</h4>
-      {children}
+    <div id={id} className="p-2 mb-4 bg-white rounded shadow-md">
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <div>{children}</div>
     </div>
   );
-}
+};
+
+export default ItineraryDay;

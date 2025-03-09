@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Register from './components/Register';
+import Login from './components/Login';
+import Logout from './components/Logout';
 import HomePage from "./features/itinerary/pages/HomePage";
 import ItineraryPage from "./features/itinerary/pages/ItineraryPage";
 import SmartPackingList from "./features/packing_list/SmartPackingList";

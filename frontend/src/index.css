@@ -193,6 +193,164 @@ body {
   .shadow {
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   }
+
+  .place-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: #f0f0f0;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .place-details {
+    flex: 1;
+    padding-right: 16px;
+  }
+  
+  .place-title {
+    font-weight: bold;
+  }
+  
+  .place-description {
+    font-size: 0.875rem;
+  }
+  
+  .place-image {
+    width: 128px;
+    height: 128px;
+  }
+  
+  .image-content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .dropdown-title {
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .dropdown-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 4px 8px;
+    border: none;
+    background: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-button:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* General container styles */
+.place-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #e5e7eb; /* gray-200 */
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.place-card:hover {
+  background-color: #d1d5db; /* Slightly darker gray */
+}
+
+/* Left section (Text container) */
+.place-card .text-container {
+  flex: 1;
+  padding-right: 16px;
+}
+
+.place-card h3 {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.place-card p {
+  font-size: 0.875rem;
+  color: #374151; /* gray-700 */
+}
+
+/* Right section (Image) */
+.place-card .image-container {
+  width: 128px;
+  height: 128px;
+}
+
+.place-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Dropdown options */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #d1d5db; /* gray-300 */
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  min-width: 120px;
+}
+
+.dropdown-menu p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 6px 8px;
+  font-size: 0.875rem;
+  background: none;
+  border: none;
+  color: #374151; /* gray-700 */
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f3f4f6; /* gray-100 */
+}
+
   
   /* ItineraryDay 
   .border {
@@ -218,5 +376,37 @@ body {
   
   .rounded-full {
     border-radius: 50%;
+  }
+  
+
+  .text-gray-500.text-xs.ml-2 {
+    font-size: 12px;
+    color: gray;
+    transition: color 0.2s ease-in-out;
+    background: none !important; /* Ensures no background */
+    border: none !important; /* Ensures no border */
+    outline: none !important; /* Prevents focus outline */
+    padding: 0;
+    display: flex; /* Helps with alignment */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .text-gray-500.text-xs.ml-2:hover {
+    color: red;
+  }
+  
+  
+  .absolute.top-0.right-2.text-gray-600.hover\:text-red-600 {
+    font-size: 16px;
+    color: gray;
+    transition: color 0.2s ease-in-out;
+    background: none; /* Ensures no background */
+    border: none; /* Ensures no border */
+    outline: none;
+  }
+  
+  .absolute.top-0.right-2.text-gray-600.hover\:text-red-600:hover {
+    color: red;
   }
   
