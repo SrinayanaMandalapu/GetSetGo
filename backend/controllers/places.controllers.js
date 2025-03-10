@@ -1,7 +1,7 @@
 const express=require('express');
 const axios=require('axios');
 
-const fetchNearbyPlaces = async (latitude, longitude, radius) => {
+const fetchNearbyPlaces = async (latitude, longitude, radius, keyword) => {
   const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
   const places = [];
   let nextPageToken = null;
@@ -12,7 +12,7 @@ const fetchNearbyPlaces = async (latitude, longitude, radius) => {
         params: {
           location: `${latitude},${longitude}`,
           radius: radius,
-          keyword: "tourist attractions", // Filter for tourist places
+          keyword: keyword, // Filter for tourist places
           key: process.env.GOOGLE_MAPS_API_KEY,
           pagetoken: nextPageToken, // Use the nextPageToken for pagination
         },
@@ -41,7 +41,7 @@ const getPlaces=async (req, res) => {
   
     try {
       // Fetch places within a 100 km radius (split into two 50 km queries)
-      const places1 = await fetchNearbyPlaces(latitude, longitude, 50000); // 50 km radius
+      const places1 = await fetchNearbyPlaces(latitude, longitude, 100000, ); // 50 km radius
       const places2 = await fetchNearbyPlaces(latitude, longitude, 100000); // 100 km radius
   
       // Combine both place lists and send the response
