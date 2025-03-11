@@ -8,10 +8,11 @@ import SmartPackingList from "./features/packing_list/SmartPackingList";
 import Header from "./components/Header";
 import WelcomePage from "./components/WelcomePage";
 import HomePage2 from "./components/HomePage2";
+import LanguageTranslator from "./components/LanguageTranslator";
 import "./index.css";
 
 export default function App() {
-  return (    
+  return (
     <Router>
       <Header />
       <Routes>
@@ -21,7 +22,8 @@ export default function App() {
         <Route path = "/home" element = {<HomePage/>} />
         <Route path = "/home2" element = {<HomePage2/>} />
         <Route path="/trip-planner/:city/:days_cnt" element={<ItineraryPage />} />
-        <Route path = "/SmartPackingList" element = {<SmartPackingList/>} />
+        <Route path="/SmartPackingList" element={<SmartPackingList />} />
+        <Route path="/LanguageTranslator" element={<LanguageTranslator />} />
       </Routes>
     </Router>
   );

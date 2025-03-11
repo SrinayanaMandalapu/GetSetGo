@@ -1,65 +1,45 @@
 require('dotenv').config();
-const express=require('express');
-const app=express();
-const dbConnect = require("./connections/dbConnection.js");
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const dbConnect = require('./connections/dbConnection.js');
 
-const port=process.env.PORT;
-const placesRouter=require("./routes/places.routes.js")
-const authRouter=require("./routes/auth.routes.js")
+const placesRouter = require('./routes/places.routes.js');
+const authRouter = require('./routes/auth.routes.js');
+const translationRoutes = require('./routes/translation.routes');
 
-app.use('/api/', placesRouter);
-app.use('/api/auth/', authRouter);
-dbConnect();
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-app.listen(port,()=>{
-    console.log(`The app is running at ${port}`);
-})
+// Database connection
+// Uncomment the following line if you want to connect to the database
+// dbConnect();
 
-//const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-// const tripRoutes = require('./routes/trips');
-// const authRoutes = require('./routes/auth'); // Import auth routes
+// API Routes
+app.use('/api/places', placesRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/translation', translationRoutes);
 
-// dotenv.config();
+// Serve frontend (React build)
+const frontendPath = path.join(__dirname, '../frontend/build');
+app.use(express.static(frontendPath));
 
-// const app = express();
-// const PORT = process.env.PORT || 5000;
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
-// app.use(express.json());
-// app.use(express.json());
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error message:', err.message);
+  console.error('Stack trace:', err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
 
-// mongoose.connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// }).then(() => {
-//     console.log('MongoDB connected');
-// }).catch(err => {
-//     console.log(err);
-// });
-// mongoose.connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// }).then(() => {
-//     console.log('MongoDB connected');
-// }).catch(err => {
-//     console.log(err);
-// });
-
-// app.use('/api/trips', tripRoutes);
-// app.use('/api/auth', authRoutes); // Use auth routes
-
-// app.get('/', (req, res) => {
-//     res.send('Trip Itinerary Planner API');
-// });
-// app.get('/', (req, res) => {
-//     res.send('Trip Itinerary Planner API');
-// });
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-// });
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-// });
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
