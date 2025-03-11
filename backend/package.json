@@ -3,26 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "dev": "nodemon index.js"
-  },
-  "dependencies": {
-    "axios": "^1.7.9",
-    "bcryptjs": "^3.0.2",
-=======
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "axios": "^1.8.2",
     "cors": "^2.8.5",
->>>>>>> e8f3a91 (implemented language Translation feature)
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.1",
-    "mongoose": "^8.10.1",
+    "mongoose": "^8.10.1"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.9"
   }
 }
