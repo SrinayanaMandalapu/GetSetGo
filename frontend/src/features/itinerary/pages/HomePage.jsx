@@ -9,7 +9,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   
   return (
-      <div className="p-6">
+      <div className="p-6 center font">
         <h2 className="text-lg font-semibold">Enter the city you want to visit:</h2>
         <input
           type="text"
@@ -24,6 +24,7 @@ export default function HomePage() {
           value={days}
           onChange={(e) => setDays(e.target.value)}
           className="border p-2 my-2"
+          min = "1"
         />
 
         <Button onClick={() => navigate(`/trip-planner/${city}/${days}`)}>Plan my trip</Button>
