@@ -180,10 +180,10 @@ export default function ItineraryPage() {
       if (!city || !selectedCategory) return; // Ensure data is available
   
       try {
-        const response = await axios.get(`http://localhost:5000/getPlaces`, {
+        const response = await axios.get(`http://localhost:5001/api/getPlaces`, {
           params: {
-            city, // Send city name instead of lat/lng
-            category: selectedCategory,
+            city, // ✅ Send city name instead of lat/lng
+            category: selectedCategory, // ✅ Use selectedCategory correctly
           },
         });
   
@@ -195,7 +195,7 @@ export default function ItineraryPage() {
     };
   
     fetchPlaces();
-  }, [selectedCategory, city]); // Trigger when city or category changes
+  }, [selectedCategory, city]); // ✅ Trigger when city or category changes
   
 
   const addToDay = (day, place) => {

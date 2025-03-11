@@ -12,11 +12,20 @@ const SmartPackingList = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ city, duration, activities }),
     });
-
+  
     const data = await response.json();
-    if (data.packing_list) setPackingList(data.packing_list);
+    
+    if (data.packing_list && typeof data.packing_list === "object") {
+      // Ensure it's an object and convert it to an array
+      const formattedList = Object.entries(data.packing_list).flatMap(([category, items]) =>
+        items.map((item) => `${category}: ${item}`)
+      );
+      setPackingList(formattedList);
+    } else {
+      setPackingList(["Invalid response from server"]);
+    }
   };
-
+  
   return (
     <div className="p-4 border rounded-md shadow-md bg-white w-96">
       <h2 className="text-lg font-semibold">Smart Packing List</h2>
@@ -54,11 +63,13 @@ const SmartPackingList = () => {
 
       {packingList.length > 0 && (
         <ul className="mt-4">
-          {packingList.map((item, index) => (
-            <li key={index} className="text-gray-700 text-sm">
-              ✅ {item}
-            </li>
-          ))}
+          {packingList.length > 0 && (
+  <ul className="mt-4">
+    {packingList.map((item, index) => (
+      <li key={index} className="text-gray-700 text-sm">✅ {item}</li>
+    ))}
+  </ul>
+)}
         </ul>
       )}
     </div>

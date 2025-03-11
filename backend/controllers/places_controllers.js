@@ -59,7 +59,9 @@
 
 const axios = require("axios");
 
+
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+//const GOOGLE_MAPS_API_KEY = "AIzaSyA97VWBcfuqAwCuEYCqfMHbja42_Ak2PfQ";
 
 
 const fetchNearbyPlaces = async (latitude, longitude, radius, keyword) => {
@@ -74,10 +76,11 @@ const fetchNearbyPlaces = async (latitude, longitude, radius, keyword) => {
           location: `${latitude},${longitude}`,
           radius: radius,
           keyword: keyword,
-          key: GOOGLE_MAPS_API_KEY,
+          key: process.env.GOOGLE_MAPS_API_KEY,
           pagetoken: nextPageToken,
         },
       });
+      console.log("fetch response : " ,response.data);
 
       places.push(...response.data.results);
       nextPageToken = response.data.next_page_token;
@@ -94,47 +97,58 @@ const fetchNearbyPlaces = async (latitude, longitude, radius, keyword) => {
   }
 };
 
-// Function to convert city name to latitude & longitude
-const getLatLong = async (city) => {
-  const url = `https://maps.googleapis.com/maps/api/geocode/json`;
-  try {
-    const response = await axios.get(url, {
-      params: {
-        address: city,
-        key: GOOGLE_MAPS_API_KEY,
-      },
-    });
 
-    const location = response.data.results[0]?.geometry.location;
-    return location ? { lat: location.lat, lng: location.lng } : null;
-  } catch (error) {
-    console.error("Error fetching coordinates:", error);
-    throw error;
-  }
-};
+// const getCoordinates = async (city) => {
+//   const url = "https://maps.googleapis.com/maps/api/geocode/json";
+
+//   try {
+//     const response = await axios.get(url, {
+//       params: {
+//         address: city,
+//         key: GOOGLE_MAPS_API_KEY,
+//       },
+//     });
+
+//     if (response.data.results.length > 0) {
+//       const { lat, lng } = response.data.results[0].geometry.location;
+//       return { latitude: lat, longitude: lng };
+//     } else {
+//       throw new Error("Location not found");
+//     }
+//   } catch (error) {
+//     console.error("Error fetching coordinates:", error);
+//     throw error;
+//   }
+// };
 
 const getCoordinates = async (city) => {
-  const url = "https://maps.googleapis.com/maps/api/geocode/json";
-
   try {
-    const response = await axios.get(url, {
-      params: {
-        address: city,
-        key: GOOGLE_MAPS_API_KEY,
-      },
-    });
+      console.log(`Fetching coordinates for city: ${city}`);
 
-    if (response.data.results.length > 0) {
+      const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+          params: {
+              address: city,
+              key: process.env.GOOGLE_MAPS_API_KEY, // Ensure this is set in .env
+          },
+      });
+
+      console.log("Google API Response:", response.data);
+
+      if (!response.data.results.length) {
+          console.log(`No location found for ${city}`);
+          return null;
+      }
+
       const { lat, lng } = response.data.results[0].geometry.location;
-      return { latitude: lat, longitude: lng };
-    } else {
-      throw new Error("Location not found");
-    }
+      console.log(`Coordinates for ${city}: lat=${lat}, lng=${lng}`);
+      return { lat, lng };
+
   } catch (error) {
-    console.error("Error fetching coordinates:", error);
-    throw error;
+      console.error("Error fetching coordinates:", error.message);
+      return null;
   }
 };
+
 
 const getPlaces = async (req, res) => {
   const { city, category } = req.query;

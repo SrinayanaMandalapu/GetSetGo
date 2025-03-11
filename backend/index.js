@@ -9,7 +9,9 @@ const authRouter = require('./routes/auth.routes.js');
 const translationRoutes = require('./routes/translation.routes');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+app.use(cors()); // Allow frontend to access backend
+
+const port=process.env.PORT || 5001;
 
 // Database connection
 // Uncomment the following line if you want to connect to the database
