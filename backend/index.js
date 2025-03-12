@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const dbConnect = require('./connections/dbConnection.js');
 
-const placesRouter = require('./routes/places.routes.js');
+const placesRouter = require('./routes/places_routes.js');
 const authRouter = require('./routes/auth.routes.js');
 const translationRoutes = require('./routes/translation.routes');
 const expenseRoutes = require('./routes/expenses');
@@ -29,8 +29,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/translation', translationRoutes);
 app.use('/api/expenses', expenseRoutes);
 
-// Serve frontend (React build)
-const frontendPath = path.join(__dirname, '../frontend/build');
+// Serve frontend after API routes
+const frontendPath = path.join(__dirname, '../frontend/dist');
 app.use(express.static(frontendPath));
 
 app.get('*', (req, res) => {
@@ -45,6 +45,6 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });

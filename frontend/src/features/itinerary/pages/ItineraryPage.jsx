@@ -180,13 +180,13 @@ export default function ItineraryPage() {
       if (!city || !selectedCategory) return; // Ensure data is available
   
       try {
-        const response = await axios.get(`http://localhost:5001/api/getPlaces`, {
+        const response = await axios.get(`http://localhost:5001/api/places`, {
           params: {
             city, // ✅ Send city name instead of lat/lng
             category: selectedCategory, // ✅ Use selectedCategory correctly
           },
         });
-  
+        
         console.log(`Fetched ${selectedCategory} places for ${city}:`, response.data.places);
         setItinerary(response.data.places);
       } catch (error) {
@@ -221,7 +221,8 @@ export default function ItineraryPage() {
     setDays(updatedDays.map((_, index) => index + 1));
     setItinerary(reindexedItinerary);
   };
-
+  console.log(days);
+  console.log(itinerary);
   return (
     <div className="flex h-screen p-6">
       {/* Sidebar: Itinerary Days */}
