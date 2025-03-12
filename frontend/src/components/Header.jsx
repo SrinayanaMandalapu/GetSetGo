@@ -7,7 +7,7 @@ export default function Header(){
         <div className="flex gap-6">
           <Link to="/home2" className="hover:text-purple-200">Home</Link>
           <Link to="/home" className="hover:text-purple-200">Trip Planner</Link>
-          <Link to="/expense-tracker" className="hover:text-purple-200">Expense Tracker</Link>
+          <Link to="/expenses" className="hover:text-purple-200">Expense Tracker</Link>
           <Link to="/LanguageTranslator" className="hover:text-purple-200">Language Translator</Link>
           <Link to="/SmartPackingList" className="hover:text-purple-200">Packing List</Link>
           <Link to="/my-itineraries" className="hover:text-purple-200">My Itineraries</Link>

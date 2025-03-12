@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import WelcomePage from "./components/WelcomePage";
 import HomePage2 from "./components/HomePage2";
 import LanguageTranslator from "./components/LanguageTranslator";
+import ExpenseTrackerPage from './features/expenseTracker/pages/ExpenseTrackerPage';
 import "./index.css";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path = "/home" element = {<HomePage/>} />
         <Route path = "/home2" element = {<HomePage2/>} />
+        <Route path="/expenses" element={<ExpenseTrackerPage />} />
         <Route path="/trip-planner/:city/:days_cnt" element={<ItineraryPage />} />
         <Route path="/SmartPackingList" element={<SmartPackingList />} />
         <Route path="/LanguageTranslator" element={<LanguageTranslator />} />

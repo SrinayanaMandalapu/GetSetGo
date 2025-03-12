@@ -1,5 +1,12 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import "./HomePage2.css";
+
+<Link to="/expenses">
+  <button className="expense-tracker-btn">
+    <i className="fas fa-receipt"></i> Expense Tracker
+  </button>
+</Link>
 
 const itineraries = [
   // India

@@ -7,15 +7,17 @@ const dbConnect = require('./connections/dbConnection.js');
 const placesRouter = require('./routes/places.routes.js');
 const authRouter = require('./routes/auth.routes.js');
 const translationRoutes = require('./routes/translation.routes');
+const expenseRoutes = require('./routes/expenses');
 
 const app = express();
+
 app.use(cors()); // Allow frontend to access backend
 
 const port=process.env.PORT || 5001;
-
+const PORT = process.env.PORT || 5000;
 // Database connection
 // Uncomment the following line if you want to connect to the database
-// dbConnect();
+dbConnect();
 
 // Middleware
 app.use(cors());
@@ -25,6 +27,7 @@ app.use(express.json());
 app.use('/api/places', placesRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/translation', translationRoutes);
+app.use('/api/expenses', expenseRoutes);
 
 // Serve frontend (React build)
 const frontendPath = path.join(__dirname, '../frontend/build');
